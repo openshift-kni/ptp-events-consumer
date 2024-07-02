@@ -19,7 +19,7 @@ spec:
         node-role.kubernetes.io/worker: ""
       serviceAccountName: ptp-event-consumer-sa
       containers:
-        - name: ptp-consumer
+        - name: ptp-event-consumer
           image: quay.io/jenchen/ptp-event-consumer:latest
           args:
             - "--local-api-addr=127.0.0.1:27017"
@@ -27,7 +27,9 @@ spec:
             - "--api-addr=127.0.0.1:27017"
           env:
             - name: NODE_NAME
-              value: cloudransno-site6
+              value: cloudransno-site7
+            - name: NODE_NAME_FULL
+              value: cloudransno-site7
             - name: NAME_SPACE 
               value: test 
             - name: CONSUMER_PORT

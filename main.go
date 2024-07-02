@@ -21,6 +21,7 @@ var (
 	resourcePrefix     = "/cluster/node/%s%s"
 	subs               []pubsub.PubSub
 	nodeName           string
+	nodeNameFull       string
 	namespace          string
 	port               string
 	clientID           uuid.UUID
@@ -45,6 +46,7 @@ func main() {
 	wg = sync.WaitGroup{}
 	nodeName = os.Getenv("NODE_NAME")
 	namespace = os.Getenv("NAME_SPACE")
+	nodeNameFull = os.Getenv("NODE_NAME_FULL")
 	port = os.Getenv("CONSUMER_PORT")
 	if nodeName == "" {
 		log.Printf("please set env variable, export NODE_NAME=k8s nodename")
@@ -58,8 +60,14 @@ func main() {
 		log.Printf("please set env variable, export CONSUMER_PORT=consumer app listening port")
 		os.Exit(1)
 	}
+	if nodeNameFull == "" {
+		log.Printf("Use nodeName as nodeNameFull")
+		nodeNameFull = nodeName
+	}
 
 	publisherServiceName := fmt.Sprintf("http://ptp-event-publisher-service-%s.openshift-ptp.svc.cluster.local:9043", nodeName)
+
+	publisherServiceNameSub := fmt.Sprintf("http://ptp-event-publisher-service-%s.openshift-ptp.svc.cluster.local:9043", nodeNameFull)
 	clientAddress := fmt.Sprintf("0.0.0.0:%s", port)
 	clientExternalEndPoint := fmt.Sprintf("http://ptp-event-consumer-service.%s.svc.cluster.local:%s", namespace, port)
 
@@ -73,6 +81,7 @@ func main() {
 	//set up log file daemon stand alone
 	//not needed when running from the container
 	log.Println("+++++++++ START ", publisherServiceName, " ptp events log +++++++++ ")
+	log.Println("+++++++++ START publisherServiceNameSub ", publisherServiceNameSub, " ptp events log +++++++++ ")
 	log.Println("+++++++++ START ", clientAddress, " ptp events log +++++++++ ")
 	log.Println("+++++++++ START ", clientExternalEndPoint, " ptp events log +++++++++ ")
 
@@ -86,7 +95,7 @@ func main() {
 	// EVENT subscription and consuming
 	initResources()
 	// 1.first subscribe to all resources
-	if e := common.Subscribe(clientID, subs, nodeName, fmt.Sprintf("%s/subscription", publisherServiceName),
+	if e := common.Subscribe(clientID, subs, nodeName, fmt.Sprintf("%s/subscription", publisherServiceNameSub),
 		clientExternalEndPoint); e != nil {
 		log.Printf("error processing subscription %s", e)
 		stopHTTPServerChan <- true
