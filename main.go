@@ -45,14 +45,10 @@ func main() {
 	stopHTTPServerChan = make(chan bool)
 	signal.Notify(cancelChan, syscall.SIGTERM, syscall.SIGINT)
 	wg = sync.WaitGroup{}
-	nodeName = os.Getenv("NODE_NAME")
+	nodeNameFull = os.Getenv("NODE_NAME")
 	namespace = os.Getenv("NAME_SPACE")
-	nodeNameFull = os.Getenv("NODE_NAME_FULL")
+	nodeName = strings.Split(nodeNameFull, ".")[0]
 	port = os.Getenv("CONSUMER_PORT")
-	if nodeName == "" {
-		log.Printf("please set env variable, export NODE_NAME=k8s nodename")
-		os.Exit(1)
-	}
 	if namespace == "" {
 		log.Printf("please set env variable, export NAME_SPACE=k8s namespace")
 		os.Exit(1)
