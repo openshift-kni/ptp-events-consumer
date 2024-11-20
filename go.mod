@@ -1,12 +1,12 @@
 module github.com/Jennifer-chen-rh/ptp-events-consumer
 
-go 1.20
+go 1.22
 
 require (
 	github.com/cloudevents/sdk-go/v2 v2.15.2
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
-	github.com/redhat-cne/sdk-go v1.5.0
+	github.com/redhat-cne/sdk-go v1.22.0
 	github.com/sirupsen/logrus v1.9.3
 )
 

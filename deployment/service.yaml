@@ -4,7 +4,7 @@ metadata:
   annotations:
     prometheus.io/scrape: "true"
   name: ptp-event-consumer-service
-  namespace: test 
+  namespace: test
   labels:
     app: consumer
 spec:

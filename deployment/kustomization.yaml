@@ -1,15 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-#- namespace.yaml
-- service-account.yaml
 #- roles.yaml
+resources:
+- namespace.yaml
+- service-account.yaml
 - service.yaml
 - consumer.yaml
 replicas:
 - count: 1
   name: ptp-event-consumer
-#images:
-#- name: cloud-event-consumer
-#  newName: quay.io/redhat-cne/cloud-event-consumer
-#  newTag: latest
+images:
+- name: ptp-event-consumer
+  newName: quay.io/jenchen/ptp-event-consumer
+  newTag: latest

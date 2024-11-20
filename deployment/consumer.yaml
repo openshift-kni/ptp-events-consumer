@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ptp-event-consumer
-  namespace: test 
+  namespace: test
   labels:
     app: consumer
 spec:
@@ -20,18 +20,18 @@ spec:
       serviceAccountName: ptp-event-consumer-sa
       containers:
         - name: ptp-event-consumer
-          image: quay.io/jenchen/ptp-event-consumer:latest
+          image: ptp-event-consumer
           args:
             - "--local-api-addr=127.0.0.1:27017"
             - "--api-path=/api/ocloudNotifications/v1/"
             - "--api-addr=127.0.0.1:27017"
           env:
             - name: NODE_NAME
-              value: cloudransno-site7
-            - name: NODE_NAME_FULL
-              value: cloudransno-site7
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             - name: NAME_SPACE 
-              value: test 
+              value: test
             - name: CONSUMER_PORT
               value: "27017"
             - name: CONSUMER_TYPE
