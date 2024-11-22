@@ -3,6 +3,7 @@ package common
 
 import (
 	"fmt"
+	"log"
 
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/google/uuid"
@@ -17,5 +18,7 @@ const (
 // GetCurrentState ... get current ptp event state
 func GetCurrentState(clientID uuid.UUID, publisherURL, resourceAddress string) (*cloudevents.Event, *cneevent.Data, error) {
 	stateURL := fmt.Sprintf("%s%s/%s/%s", publisherURL, resourceAddress, clientID, CURRENTSTATE)
+
+	log.Printf("stateURL %s", stateURL)
 	return GetEventData(stateURL)
 }
