@@ -14,7 +14,8 @@ import (
 // GetResources ... get resource types
 func GetResources() map[string]string {
 	subscribeTo := map[string]string{}
-	//subscribeTo[string(ptpEvent.OsClockSyncStateChange)] = string(ptpEvent.OsClockSyncState)
+	log.Println("GetResources new")
+	subscribeTo[string(ptpEvent.OsClockSyncStateChange)] = string(ptpEvent.OsClockSyncState)
 	subscribeTo[string(ptpEvent.PtpStateChange)] = string(ptpEvent.PtpLockState)
 	subscribeTo[string(ptpEvent.PtpClockClassChange)] = string(ptpEvent.PtpClockClass)
 	return subscribeTo
