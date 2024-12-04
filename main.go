@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -63,6 +64,12 @@ func main() {
 	if nodeNameFull == "" {
 		log.Printf("Use nodeName as nodeNameFull")
 		nodeNameFull = nodeName
+	}
+	if nodeNameFull == nodeName {
+		nodeNameFull = nodeName
+		names := strings.Split(nodeName, ".")
+		nodeName = names[0]
+		log.Printf("Use nodeName as %s", nodeName)
 	}
 
 	publisherServiceName := fmt.Sprintf("http://ptp-event-publisher-service-%s.openshift-ptp.svc.cluster.local:9043", nodeName)
