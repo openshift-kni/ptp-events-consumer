@@ -7,8 +7,6 @@ ENV GOPATH=/go
 WORKDIR /go/src/github.com/Jennifer-chen-rh/ptp-events-consumer
 COPY . .
 
-RUN go mod tidy
-RUN go mod vendor
 RUN go build
 
 ENTRYPOINT ["./ptp-events-consumer"]
