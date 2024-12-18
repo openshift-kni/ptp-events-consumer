@@ -17,7 +17,7 @@ func GetResources() map[string]string {
 	log.Println("GetResources new")
 	subscribeTo[string(ptpEvent.OsClockSyncStateChange)] = string(ptpEvent.OsClockSyncState)
 	subscribeTo[string(ptpEvent.PtpStateChange)] = string(ptpEvent.PtpLockState)
-	subscribeTo[string(ptpEvent.PtpClockClassChange)] = string(ptpEvent.PtpClockClass)
+	subscribeTo[string(ptpEvent.PtpClockClassChange)] = string(ptpEvent.PtpClockClassV1)
 	return subscribeTo
 }
 
@@ -29,7 +29,9 @@ func Subscribe(clientID uuid.UUID, subs []pubsub.PubSub, nodeName, publisherURL,
 	_ = eventSubscriber.SetEndPointURI(returnEndPoint) // where you want events to be posted
 	eventSubscriber.Action = channel.NEW               //0=new
 	// create a subscriber model
-	eventSubscriber.AddSubscription(subs...)
+	for _, s := range subs {
+		eventSubscriber.AddSubscription(s)
+	}
 	log.Printf("subscription data%s", eventSubscriber.String())
 	ce, _ := eventSubscriber.CreateCloudEvents()
 	ce.SetSubject(channel.NEW.String())
