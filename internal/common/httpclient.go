@@ -60,7 +60,7 @@ func GetEventData(url string) (*cloudevents.Event, *cneevent.Data, error) {
 	var err error
 	body, err := ioutil.ReadAll(response.Body)
 	log.Infof("Event before decoder %s", body)
-	if err = json.NewDecoder(response.Body).Decode(event); err != nil {
+	if err = json.Unmarshal(body, &event); err != nil {
 		return nil, nil, err
 	}
 	log.Infof("event from response %s", event.Data())

@@ -19,8 +19,8 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/redhat-cne/sdk-go v1.5.0 h1:kcbBiASRtHeDgXAvNB+JLrN4DoxGSwWxu2BYwhSL2oE=
-github.com/redhat-cne/sdk-go v1.5.0/go.mod h1:kKOXU8uyHbpwXCKrjzH4WVLq2/RZ5pchiI2LLvmFi5E=
+github.com/redhat-cne/sdk-go v1.20.0 h1:QRQpuBgQXLgLyAhZf973NrnVy0XAx2cCBn3Ien2WazE=
+github.com/redhat-cne/sdk-go v1.20.0/go.mod h1:Sdn0zyCAdAHsSH+g8Em8AJO+SdJv7lWP4wF+KiC8Vk8=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
