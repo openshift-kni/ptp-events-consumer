@@ -1,4 +1,4 @@
-FROM quay.io/redhat-cne/openshift-origin-release:rhel-8-golang-1.20-openshift-4.14 AS builder
+FROM registry.hub.docker.com/library/golang:1.23 as builder
 ENV CGO_ENABLED=1
 ENV COMMON_GO_ARGS=-race
 ENV GOOS=linux
