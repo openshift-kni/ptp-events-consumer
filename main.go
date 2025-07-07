@@ -140,7 +140,19 @@ func main() {
 func callGetCurrentState(publisherServiceName string) {
 	for _, r := range subs {
 		if event, data, err := common.GetCurrentState(clientID, publisherServiceName, r.Resource); err == nil {
-			log.Println("Succeeded callGetCurrentStat ", event.Time(), event.Type(), data.Values)
+
+			if strings.Contains(event.Type(), "ptp-clock-class-change") {
+				clock_class := fmt.Sprintf("%.0f", data.Values[0].Value)
+
+				log.Printf("CLOCKCLASS value is %s", clock_class)
+				if clock_class == "0" {
+					log.Printf("error callGetCurrentStat CLOCKCLASS Invalid_Value is 0 for resource %s, please check the ptp clock", r.Resource)
+				} else {
+					log.Println("Succeeded callGetCurrentStat CLOCKCLASS value is ", clock_class, event.Time(), event.Type(), data.Values)
+				}
+			} else {
+				log.Println("Succeeded callGetCurrentStat ", event.Time(), event.Type(), data.Values)
+			}
 
 		} else {
 			log.Printf("Failed callGetCurrentStat %s callGetCurrentState error: %s", r, err.Error())
