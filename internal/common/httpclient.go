@@ -37,6 +37,8 @@ func Post(address string, e cloudevents.Event) (int, error) {
 	e.SetDataContentType(cloudevents.ApplicationJSON)
 	ctx := cloudevents.ContextWithTarget(sendCtx, address)
 	result := c.Send(ctx, e)
+	// successful result: "200: "
+	log.Infof("result %s", result)
 	// With current implementation of cloudevents we cannot get ack on delivered of not
 	if cloudevents.IsUndelivered(result) || errors.Is(result, syscall.ECONNREFUSED) {
 		log.Errorf("failed to send to address %s with %s", address, result)
