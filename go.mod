@@ -1,6 +1,6 @@
 module github.com/Jennifer-chen-rh/ptp-events-consumer
 
-go 1.20
+go 1.25.4
 
 require (
 	github.com/cloudevents/sdk-go/v2 v2.15.2
