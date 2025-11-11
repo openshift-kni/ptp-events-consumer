@@ -1,4 +1,4 @@
-FROM registry.hub.docker.com/library/golang:1.23 as builder
+FROM registry.hub.docker.com/library/golang:1.25.4 as builder
 ENV CGO_ENABLED=1
 ENV COMMON_GO_ARGS=-race
 ENV GOOS=linux
