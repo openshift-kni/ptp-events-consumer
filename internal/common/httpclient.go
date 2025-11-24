@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"syscall"
 	"time"
@@ -58,7 +58,7 @@ func GetEventData(url string) (*cloudevents.Event, *cneevent.Data, error) {
 	event := &cloudevents.Event{}
 	data := &cneevent.Data{}
 	var err error
-	body, err := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
 	log.Infof("Event before decoder %s", body)
 	if err = json.NewDecoder(response.Body).Decode(event); err != nil {
 		return nil, nil, err
